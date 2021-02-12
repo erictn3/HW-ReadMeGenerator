@@ -1,14 +1,19 @@
 const inquirer = require('inquirer');
 const path = require("path");
 const fs = require('fs');
-const util = require('./utils/generateReadMe');
 
-const writeFileAsync = util.promisify(fs.writeFile);
+const generateREADME = require('./utils/generateReadMe');
 
+// array of question objects
 const questions = [{
     type: 'input',
     name: 'title',
-    message: 'What is the title of the project?',
+    message: 'What is the title of your project?',
+  },
+  {
+    type: "input",
+    name: "github",
+    message: "What is your GitHub username?"
   },
   {
     type: 'input',
@@ -18,12 +23,12 @@ const questions = [{
   {
     type: 'input',
     name: 'installation',
-    message: 'What are thee installation instructions for this project?',
+    message: 'What are the installation instructions for this project (ie-dependencies)?',
   },
   {
     type: 'input',
     name: 'test',
-    message: 'Explain how to run the automated tests for this system.',
+    message: 'Explain how to run the automated tests for this system (ie. node).',
   },
   {
     type: 'input',
@@ -40,15 +45,10 @@ const questions = [{
     name: 'license',
     message: 'Please select a license.',
     choices: [
-      'Apache License v2.0',
-      'GNU v3.0',
-      'MIT License',
+      'Apache',
+      'GNU',
+      'MIT',
     ],
-  },
-  {
-    type: 'input',
-    name: 'git',
-    message: 'Enter your github URL.',
   },
   {
     type: 'input',
@@ -59,12 +59,31 @@ const questions = [{
     type: 'input',
     name: 'linkedin',
     message: 'Enter your LinkedIn URL.',
-  }]
+  },
+]
 
+// function for writing the README file
+function writeToFile(fileName, data){
+  fs.writeFile(fileName, data, function(err){
+    console.log(fileName)
+    console.log(data)
+    if (err) {
+      return console.log(err)
+    } else {
+      console.log("Success!")
+    }
+  })
+}
+
+// function for initializing program
+function init() {
+  inquirer.prompt(questions)
   .then((data) => {
-    const filename = `${data.name.toLowerCase().split(' ').join('')}.json`;
+    writeToFile("README.md", generateREADME(data));
+    console.log(data)
+  })
+}
 
-    fs.writeFile(filename, JSON.stringify(data, null, '\t'), (err) =>
-      err ? console.log(err) : console.log('Success!')
-    );
-  });
+// call function to initialize program
+init()
+

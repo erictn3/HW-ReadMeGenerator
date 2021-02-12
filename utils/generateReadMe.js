@@ -1,6 +1,7 @@
-function generateReadMe(response){
+function generateReadMe(data){
   return `
-# ${response.title}
+# ${data.title}
+https://github.com/${data.username}/${data.title}
   
 # Table of Contents
 
@@ -10,22 +11,22 @@ function generateReadMe(response){
 * [credits][#credits]
 * [license][#license]
 # Installation
-${installation}
+${data.installation}
 ## Usage
-${usage}
+${data.usage}
 ## Contribution
-${contribution}
+${data.contribution}
 ## Instruction
-${instruction}
+${data.instruction}
 ## Credits
-${credits}
+${data.credits}
 ## License
-${license}
+${data.license}
 
 # Contact
-* Github: ${git}
-* Linkedin: ${linkedin}
-* E-mail: ${email}`;
+* Github: ${data.git}
+* Linkedin: ${data.linkedin}
+* E-mail: ${data.email}`;
 }
 
 module.exports = generateReadMe;
