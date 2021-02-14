@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+// The Path module provides a way of working with directories and file paths ie. utils folderr
 const path = require("path");
 const fs = require('fs');
 

@@ -1,15 +1,20 @@
 function generateReadMe(data){
   return `
 # ${data.title}
+
 https://github.com/${data.username}/${data.title}
+
+#Description
+${data.description}
   
 # Table of Contents
-
 * [Installation][#installation]
 * [Usage][#usage]
 * [contribution][#contribution]
+* [instruction][#instruction]
 * [credits][#credits]
 * [license][#license]
+
 # Installation
 ${data.installation}
 ## Usage
